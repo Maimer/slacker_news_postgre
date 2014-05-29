@@ -9,8 +9,11 @@
     <div class="submit">
       <ul>
         <form action="/article/<%= @id %>" name="submit" onsubmit="return validateForm()" method="post">
+          <li><div class="spacer1">Author: </div><input type="text" name="author" value="<%= @author %>" size="50">
+          <div class="error" id="author_alert"></div>
+          </li>
           <li><div class="spacer1">Comment: </div>
-            <textarea name="desc" rows="3" cols="60"><%= @desc %></textarea>
+            <textarea name="comment" rows="3" cols="60"><%= @comment %></textarea>
           <div class="error" id="desc_alert"></div></li>
           <li><div class="spacer1"></div><input type="submit"></li>
          </form>
@@ -22,6 +25,7 @@
       <% time = (Time.parse(Time.now.to_s) - Time.parse(comment["created_at"]))/60 %>
       <%= comment["cauth"] + " " + make_time(time.round) %> -
       <%= comment["comment"] %>
+      </br></br>
     </div>
   <% end %>
 </div>

@@ -48,7 +48,7 @@ def find_comments(id)
   db_connection do |conn|
     query = "SELECT comments.author AS cauth, comments.comment, comments.created_at FROM comments
             WHERE comments.articles_id = #{id}
-            ORDER BY comments.created_at"
+            ORDER BY comments.created_at DESC"
     conn.exec(query)
   end
 end

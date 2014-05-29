@@ -47,6 +47,7 @@ post '/article/:id' do
     @resubmit = true
     erb :'article/article'
   else
-    redirect '/article/:id'
+    save_comments(@id, @author, @comment)
+    redirect to("/article/#{@id}")
   end
 end
