@@ -33,6 +33,8 @@ end
 
 get '/article/:id' do
   @id = params[:id]
+  @comments = find_comments(@id)
+  @article = find_article(@id)
   @resubmit = false
   erb :'article/article'
 end

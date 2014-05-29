@@ -18,10 +18,11 @@ end
 def find_articles
   db_connection do |conn|
     query = "SELECT articles.id, articles.author, articles.title, articles.url,
-              articles.description, count(*) FROM articles
-              JOIN comments ON articles.id = comments.articles_id
-              GROUP BY articles.id
-              ORDER BY articles.created_at"
+              articles.description, articles.created_at, count(comments.articles_id)
+              FROM articles
+              LEFT JOIN comments ON articles.id = comments.articles_id
+            GROUP BY articles.id
+            ORDER BY articles.created_at DESC"
     conn.exec(query)
   end
 end
@@ -34,11 +35,20 @@ def save_article(author, url, title, description)
   end
 end
 
-def find_comments
+def find_article(id)
   db_connection do |conn|
-    query = "SELECT comments.author, comments.comment FROM articles
-              JOIN comments ON articles.id = comments.articles_id
-              ORDER BY comments.created_at"
+    query = "SELECT articles.id, articles.author, articles.title, articles.url,
+              articles.description FROM articles
+            WHERE articles.id = #{id}"
+    conn.exec(query)
+  end
+end
+
+def find_comments(id)
+  db_connection do |conn|
+    query = "SELECT comments.author AS cauth, comments.comment, comments.created_at FROM comments
+            WHERE comments.articles_id = #{id}
+            ORDER BY comments.created_at"
     conn.exec(query)
   end
 end
@@ -46,8 +56,8 @@ end
 def save_comments(id, author, comment)
   db_connection do |conn|
     query = "INSERT INTO comments (articles_id, author, comment, created_at)
-              VALUES ('#{id}', '#{author}', '#{comment}', now())"
-    conn.exec(query)
+              VALUES ($1, $2, $3, now())"
+    conn.exec_params(query, [id, author, comment])
   end
 end
 

@@ -1,0 +1,27 @@
+<div class="section">
+  <div class="article1">
+    <a href="<%= @article[0]["url"] %>"><%= @article[0]["title"] %></a>
+  </div>
+  <div class="details">
+    <%= @article[0]["description"] %>
+  </div>
+  </br>
+    <div class="submit">
+      <ul>
+        <form action="/article/<%= @id %>" name="submit" onsubmit="return validateForm()" method="post">
+          <li><div class="spacer1">Comment: </div>
+            <textarea name="desc" rows="3" cols="60"><%= @desc %></textarea>
+          <div class="error" id="desc_alert"></div></li>
+          <li><div class="spacer1"></div><input type="submit"></li>
+         </form>
+      </ul>
+    </div>
+  </br>
+  <% @comments.each do |comment| %>
+    <div class="details">
+      <% time = (Time.parse(Time.now.to_s) - Time.parse(comment["created_at"]))/60 %>
+      <%= comment["cauth"] + " " + make_time(time.round) %> -
+      <%= comment["comment"] %>
+    </div>
+  <% end %>
+</div>

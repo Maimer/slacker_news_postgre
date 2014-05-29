@@ -80,6 +80,18 @@ nav a {
   color: #000000;
 }
 
+.article1 {
+  padding-left: 36px;
+  padding-bottom: 5px;
+  margin: 0 0 0 0;
+  font-size: 10pt;
+}
+
+.article1 a {
+  text-decoration: none;
+  color: #000000;
+}
+
 .website {
   font-size: 8pt;
   color: #828282;
@@ -89,6 +101,11 @@ nav a {
   font-size: 7pt;
   color: #828282;
   padding-left: 36px;
+}
+
+.details a {
+  text-decoration: none;
+  color: #828282;
 }
 
 .submit {
@@ -116,6 +133,12 @@ nav a {
   text-align: right;
   display: inline-block;
   width: 90px;
+}
+
+.spacer1 {
+  text-align: right;
+  display: inline-block;
+  width: 98px;
 }
 
 .error {
