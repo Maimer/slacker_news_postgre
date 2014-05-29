@@ -17,7 +17,10 @@ end
 
 def find_articles
   db_connection do |conn|
-    query = "SELECT * FROM articles
+    query = "SELECT articles.id, articles.author, articles.title, articles.url,
+              articles.description, count(*) FROM articles
+              JOIN comments ON articles.id = comments.articles_id
+              GROUP BY articles.id
               ORDER BY articles.created_at"
     conn.exec(query)
   end
@@ -26,8 +29,8 @@ end
 def save_article(author, url, title, description)
   db_connection do |conn|
     query = "INSERT INTO articles (author, title, url, description, created_at)
-              VALUES (#{author}, #{title}, #{url}, #{description}, now())"
-    conn.exec(query)
+              VALUES ($1, $2, $3, $4, now())"
+    conn.exec_params(query, [author, title, url, description])
   end
 end
 
@@ -43,13 +46,20 @@ end
 def save_comments(id, author, comment)
   db_connection do |conn|
     query = "INSERT INTO comments (articles_id, author, comment, created_at)
-              VALUES (#{id}, #{author}, #{comment}, now())"
+              VALUES ('#{id}', '#{author}', '#{comment}', now())"
     conn.exec(query)
   end
 end
 
 def check_blanks(author, title, url, desc)
   if author == "" || title == "" || url == "" || desc == ""
+    return true
+  end
+  false
+end
+
+def check_author(author)
+  if author == ""
     return true
   end
   false
@@ -100,10 +110,3 @@ def strip_url(url)
   url = url.split(".")
   url[-2] + "." + url[-1]
 end
-
-# def save_post(array)
-#   array << Time.now
-#   File.open('data/articles.csv', 'a') do |file|
-#     file.puts(array.join(","))
-#   end
-# end

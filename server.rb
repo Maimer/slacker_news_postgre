@@ -30,3 +30,21 @@ post '/submit' do
     redirect '/'
   end
 end
+
+get '/article/:id' do
+  @id = params[:id]
+  @resubmit = false
+  erb :'article/article'
+end
+
+post '/article/:id' do
+  @id = params[:id]
+  @author = params["author"]
+  @comment = params["comment"]
+  if check_author(@author) || check_desc(@comment)
+    @resubmit = true
+    erb :'article/article'
+  else
+    redirect '/article/:id'
+  end
+end
