@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Slacker News</title>
+    <link rel="stylesheet" href="css.css">
+
+  </head>
+  <body>
+    <div class="main">
+      <nav>
+        <div class="icon"><img src="images/y18.gif" class="headerimage"></div>
+        <div class="title"><a href="/">Slacker News</a></div>
+        <div class="menu">
+          <a href="#">new</a> |
+          <a href="#">comments</a> |
+          <a href="#">ask</a> |
+          <a href="#">jobs</a> |
+          <a href="/submit">submit</a>
+        </div>
+        <div class="login">
+          <a href="#">login</a>
+        </div>
+      </nav>
+
+      <%= yield %>
+
+    </div>
+  <script type="text/javascript" src="js.js"></script>
+  </body>
+</html>

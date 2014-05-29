@@ -1,0 +1,29 @@
+<div class="submit">
+  <ul>
+    <form action="/submit" name="submit" onsubmit="return validateForm()" method="post">
+      <li><div class="spacer">Author: </div><input type="text" name="author" value="<%= @author %>" size="50">
+        <div class="error" id="author_alert"></div>
+      </li>
+
+      <li><div class="spacer">Title: </div><input type="text" name="title" value="<%= @title %>" size="50">
+        <div class="error" id="title_alert"></div>
+      </li>
+
+      <li><div class="spacer">URL: </div><input type="text" name="url" value="<%= @url %>" size="50">
+        <% if @url != "" && check_dupurl(@url, @articles) == true %>
+          <div class="error"> *URL has already been submitted </div>
+        <% end %>
+        <% if @url != "" && check_url(@url) == true %>
+          <div class="error"> *URL is invalid </div>
+        <% end %>
+        <div class="error" id="url_alert"></div>
+      </li>
+
+      <li><div class="spacer">Description: </div><textarea name="desc" rows="10" cols="60"><%= @desc %></textarea>
+        <div class="error" id="desc_alert"></div>
+      </li>
+
+      <li><div class="spacer"></div><input type="submit"></li>
+    </form>
+  </ul>
+</div>

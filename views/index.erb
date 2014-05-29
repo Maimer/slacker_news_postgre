@@ -1,0 +1,12 @@
+<% @articles.each_with_index do |article, i| %>
+  <div class="section">
+    <div class="article">
+      <span class="number"><%= i+1 %>.<img src="images/grayarrow.gif" class="arrow"></span>
+      <a href="<%= article[:url] %>" target="_blank"><%= article[:title] %></a> <span class="website">(<%= strip_url(URI(article[:url]).host.downcase) %>)</span>
+    </div>
+    <div class="details">
+      <% time = (Time.parse(Time.now.to_s) - Time.parse(article[:created]))/60 %>
+      Submitted by <%= article[:author] + " " + make_time(time.round) %>
+    </div>
+  </div>
+<% end %>

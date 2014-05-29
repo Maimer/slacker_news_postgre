@@ -1,0 +1,125 @@
+body {
+  font-family: Verdana;
+}
+
+nav {
+  background-color: #FF6600;
+  font-size: 10pt;
+  overflow: auto;
+  margin: 0;
+  padding: 2px;
+}
+
+nav a {
+  color: #000000;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon {
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  float: left;
+  margin: 2px 10px 0 5px;
+  font-weight: bold;
+}
+
+.menu {
+  float: left;
+  margin-top: 2px;
+}
+
+.login {
+  float: right;
+  margin: 2px 5px 0 0;
+}
+
+.section {
+  clear: both;
+  background-color: #f6f6ef;
+  padding: 8px 0 0 0;
+  margin: 0;
+  overflow: auto;
+}
+
+.headerimage {
+  border: 1px solid #FFFFFF;
+  display: block;
+}
+
+.main {
+  width: 85%;
+  margin: 0 auto;
+}
+
+.number {
+  text-align: right;
+  width: 36px;
+  float: left;
+  font-size: 10pt;
+  color: #828282;
+}
+
+.arrow {
+  margin: 0 3px 0 1px;
+  padding: 0;
+}
+
+.article {
+  margin: 0 0 0 0;
+  font-size: 10pt;
+}
+
+.article a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.website {
+  font-size: 8pt;
+  color: #828282;
+}
+
+.details {
+  font-size: 7pt;
+  color: #828282;
+  padding-left: 36px;
+}
+
+.submit {
+  font-size: 10pt;
+  color: #828282;
+  background-color: #f6f6ef;
+  padding: 8px;
+  margin: 0;
+}
+
+.submit ul {
+  padding: 0;
+  margin: 0;
+}
+
+.submit li {
+  list-style-type: none;
+}
+
+.submit textarea {
+  vertical-align: top;
+}
+
+.spacer {
+  text-align: right;
+  display: inline-block;
+  width: 90px;
+}
+
+.error {
+  display: inline-block;
+  font-size: 8pt;
+  color: red;
+}
