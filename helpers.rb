@@ -16,11 +16,36 @@ def db_connection
 end
 
 def find_articles
-
+  db_connection do |conn|
+    query = "SELECT * FROM articles
+              ORDER BY articles.created_at"
+    conn.exec(query)
+  end
 end
 
 def save_article(author, url, title, description)
+  db_connection do |conn|
+    query = "INSERT INTO articles (author, title, url, description, created_at)
+              VALUES (#{author}, #{title}, #{url}, #{description}, now())"
+    conn.exec(query)
+  end
+end
 
+def find_comments
+  db_connection do |conn|
+    query = "SELECT comments.author, comments.comment FROM articles
+              JOIN comments ON articles.id = comments.articles_id
+              ORDER BY comments.created_at"
+    conn.exec(query)
+  end
+end
+
+def save_comments(id, author, comment)
+  db_connection do |conn|
+    query = "INSERT INTO comments (articles_id, author, comment, created_at)
+              VALUES (#{id}, #{author}, #{comment}, now())"
+    conn.exec(query)
+  end
 end
 
 def check_blanks(author, title, url, desc)
